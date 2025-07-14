@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#0066cc">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="manifest.json">
     <!-- Palm tree icon for iOS -->
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
     <!-- Palm tree icon for other devices -->
@@ -71,13 +70,11 @@
         
         h1 {
             color: var(--primary-color);
-            text-align: center;
             margin-bottom: 5px;
             font-size: 2.2rem;
         }
         
         .subtitle {
-            text-align: center;
             color: var(--text-color);
             opacity: 0.8;
             margin-bottom: 20px;
@@ -172,10 +169,23 @@
         
         .language-content {
             display: none;
+            width: 100%;
         }
         
         .language-content.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* 日本語タイトルとサブタイトルの中央揃えを強化 */
+        .language-content.japanese h1 {
+            letter-spacing: 0.1em;
+        }
+        
+        .language-content.japanese .subtitle {
+            letter-spacing: 0.05em;
         }
         
         .spot-button {
@@ -705,7 +715,7 @@
                     name: "海中道路",
                     type: "風景ドライブ",
                     description: "本島と平安座島を結ぶ美しい4.7kmの堤防道路で、両側に素晴らしい海の景色が広がります。途中には探索できる小さな島がいくつかあります。",
-                    tips: "休憩所に停車して景色を楽しみ、地元の露店でスナックを試してみましょう。"
+                    tips: "休憩所に停車して景色を楽しみ、地��の露店でスナックを試してみましょう。"
                 },
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnO-nYff3BIBpqYeTaypRGbUEeS_dyW0Tbtkj6BHuzn0Od04I9QrRKbKk&s=10"
             },
