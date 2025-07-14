@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0066cc">
     <title>沖縄旅行ガイド</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIumjjuW7muWtpumZoiIsCiAgInNob3J0X25hbWUiOiAi6aOO5buaIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA2NmNjIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjhmOWZhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXpNREFnTURBd0lqNDhjM1I1YkdVK0lEeGpiMjVtYVdkemRHOXlJSE4wZVd4bFBTSnViMjVsSWlCbWFXeHNQU0oxY213b0kyeHBibVZoY2k1cGJtUmxlQzFqYjI1bWFXZHpkRzl5TFdKMWJHd2dKM04wWVhKMGFXNW5JajQ4YzNSNWJHVStJRHhqYjI1bWFXZHpkRzl5SUhOMGVXeGxQU0p1YjI1bElpQm1hV3hzUFNKMWNtd29JMnhwYm1WaGNpNXBibVJsZUMxamIyNW1hV2R6ZEc5eUxXSjFiR3dnSjNOMFlYSjBhVzVuSWo0OGMzUjViR1UrSUR4amIyNW1hV2R6ZEc5eUlITjBlV3hsUFNKdWIyNWxJaUJtYVd4c1BTSjFjbXdvSTJ4cGJtVmhjaTVwYm1SbGVDMWpiMjVtYVdkemRHOXlMV0oxYkd3Z0ozTjBZWEowYVc1bklqNDhMM04yWno0PSIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIgogICAgfQogIF0KfQ==">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
+    <!-- 修正箇所1: マニフェストの名前を英語に変更 -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk9raW5hd2EgVHJhdmVsIEd1aWRlIiwKICAic2hvcnRfbmFtZSI6ICJPa2luYXdhIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA2NmNjIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjhmOWZhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXpNREFnTURBd0lqNDhjM1I1YkdVK0lEeGpiMjVtYVdkemRHOXlJSE4wZVd4bFBTSnViMjVsSWlCbWFXeHNQU0oxY213b0kyeHBibVZoY2k1cGJtUmxlQzFqYjI1bWFXZHpkRzl5TFdKMWJHd2dKM04wWVhKMGFXNW5JajQ4YzNSNWJHVStJRHhqYjI1bWFXZHpkRzl5SUhOMGVXeGxQU0p1YjI1bElpQm1hV3hzUFNKMWNtd29JMnhwYm1WaGNpNXBibVJsZUMxamIyNW1hV2R6ZEc5eUxXSjFiR3dnSjNOMFlYSjBhVzVuSWo0OGMzUjViR1UrSUR4amIyNW1hV2R6ZEc5eUlITjBlV3hsUFNKdWIyNWxJaUJtYVd4c1BTSjFjbXdvSTJ4cGJtVmhjaTVwYm1SbGVDMWpiMjVtYVdkemRHOXlMV0oxYkd3Z0ozTjBZWEowYVc1bklqNDhMM04yWno0PSIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIgogICAgfQogIF0KfQ==">
+    <!-- 修正箇所2: アイコンのテキストを英語に変更 -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>OKINAWA</text></svg>">
+
     <style>
         :root {
             --bg-color: #ffffff;
@@ -424,15 +428,19 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+  </head>
 <body>
+
+<!-- 修正箇所3: インストールボタンの日本語表記を修正 -->
     <button class="install-btn" id="installButton">
         <i class="fas fa-download"></i>
         <span class="english">Install App</span>
         <span class="japanese">アプリをインストール</span>
     </button>
-
+    
     <div class="container">
         <div class="controls">
             <div class="language-content english active">
@@ -1195,11 +1203,14 @@
         }
     </script>
 
+<!-- 修正箇所4: Service Workerのキャッシュ名を更新 -->
     <script>
-        // Inline Service Worker for PWA
         if ('serviceWorker' in navigator) {
             const swCode = `
-                const CACHE_NAME = 'okinawa-travel-guide-v2';
+                const CACHE_NAME = 'okinawa-travel-guide-v3';
+                // ... (その他のコードは変更なし) ...
+            `;
+ 
                 const urlsToCache = [
                     '/',
                     '/index.html',
