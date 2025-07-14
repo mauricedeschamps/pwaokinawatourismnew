@@ -170,16 +170,12 @@
             transform: translateY(-2px);
         }
         
-        .japanese {
-            font-size: var(--font-size-normal);
-            color: var(--text-color);
-            opacity: 0.8;
-            margin-top: 3px;
-            font-style: normal;
+        .language-content {
+            display: none;
         }
         
-        .dark-mode .japanese {
-            opacity: 0.7;
+        .language-content.active {
+            display: block;
         }
         
         .spot-button {
@@ -335,14 +331,6 @@
             text-decoration: underline;
         }
         
-        .language-content {
-            display: none;
-        }
-        
-        .language-content.active {
-            display: block;
-        }
-        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -380,52 +368,48 @@
 <body>
     <div class="container">
         <div class="controls">
-            <h1>
-                <span class="english">Okinawa Travel Guide</span>
-                <span class="japanese">沖縄観光ガイド</span>
-            </h1>
+            <div class="language-content english active">
+                <h1>Okinawa Travel Guide</h1>
+                <p class="subtitle">Discover the best of Okinawa's attractions</p>
+            </div>
+            <div class="language-content japanese">
+                <h1>沖縄観光ガイド</h1>
+                <p class="subtitle">沖縄の魅力を発見しましょう</p>
+            </div>
+            
             <div class="button-group">
                 <button class="mode-toggle" onclick="toggleDarkMode()">
                     <i class="fas fa-moon"></i>
-                    <span class="english">Dark Mode</span>
-                    <span class="japanese">ダークモード</span>
+                    <span class="language-content english active">Dark Mode</span>
+                    <span class="language-content japanese">ダークモード</span>
                 </button>
                 <button class="lang-toggle" onclick="toggleLanguage()">
                     <i class="fas fa-language"></i>
-                    <span class="english">日本語</span>
-                    <span class="japanese">English</span>
+                    <span class="language-content english active">日本語</span>
+                    <span class="language-content japanese">English</span>
                 </button>
             </div>
         </div>
         
-        <p class="subtitle english">Discover the best of Okinawa's attractions</p>
-        <p class="subtitle japanese">沖縄の魅力を発見しましょう</p>
-        
         <div class="okinawa-map">
-            <!-- Area blocks -->
-            <div class="area area-1" onclick="showAreaInfo('yanbaru')">
-                <span class="english">Yanbaru</span>
-                <span class="japanese">ヤンバル</span>
+            <!-- English Map Areas -->
+            <div class="language-content english active">
+                <div class="area area-1" onclick="showAreaInfo('yanbaru')">Yanbaru</div>
+                <div class="area area-2" onclick="showAreaInfo('motobu')">Motobu</div>
+                <div class="area area-3" onclick="showAreaInfo('north-resorts')">North Resorts</div>
+                <div class="area area-4" onclick="showAreaInfo('central')">Central</div>
+                <div class="area area-5" onclick="showAreaInfo('naha')">Naha Area</div>
+                <div class="area area-6" onclick="showAreaInfo('southern')">South</div>
             </div>
-            <div class="area area-2" onclick="showAreaInfo('motobu')">
-                <span class="english">Motobu</span>
-                <span class="japanese">本部半島</span>
-            </div>
-            <div class="area area-3" onclick="showAreaInfo('north-resorts')">
-                <span class="english">North Resorts</span>
-                <span class="japanese">北部リゾート</span>
-            </div>
-            <div class="area area-4" onclick="showAreaInfo('central')">
-                <span class="english">Central</span>
-                <span class="japanese">中部</span>
-            </div>
-            <div class="area area-5" onclick="showAreaInfo('naha')">
-                <span class="english">Naha Area</span>
-                <span class="japanese">那覇周辺</span>
-            </div>
-            <div class="area area-6" onclick="showAreaInfo('southern')">
-                <span class="english">South</span>
-                <span class="japanese">南部</span>
+            
+            <!-- Japanese Map Areas -->
+            <div class="language-content japanese">
+                <div class="area area-1" onclick="showAreaInfo('yanbaru')">ヤンバル</div>
+                <div class="area area-2" onclick="showAreaInfo('motobu')">本部半島</div>
+                <div class="area area-3" onclick="showAreaInfo('north-resorts')">北部リゾート</div>
+                <div class="area area-4" onclick="showAreaInfo('central')">中部</div>
+                <div class="area area-5" onclick="showAreaInfo('naha')">那覇周辺</div>
+                <div class="area area-6" onclick="showAreaInfo('southern')">南部</div>
             </div>
         </div>
         
