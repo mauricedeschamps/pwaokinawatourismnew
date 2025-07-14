@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okinawa Travel Guide</title>
     <meta name="theme-color" content="#0066cc">
+    <title>沖縄旅行ガイド</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Palm tree icon for iOS -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIumjjuW7muWtpumZoiIsCiAgInNob3J0X25hbWUiOiAi6aOO5buaIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA2NmNjIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjhmOWZhIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXpNREFnTURBd0lqNDhjM1I1YkdVK0lEeGpiMjVtYVdkemRHOXlJSE4wZVd4bFBTSnViMjVsSWlCbWFXeHNQU0oxY213b0kyeHBibVZoY2k1cGJtUmxlQzFqYjI1bWFXZHpkRzl5TFdKMWJHd2dKM04wWVhKMGFXNW5JajQ4YzNSNWJHVStJRHhqYjI1bWFXZHpkRzl5SUhOMGVXeGxQU0p1YjI1bElpQm1hV3hzUFNKMWNtd29JMnhwYm1WaGNpNXBibVJsZUMxamIyNW1hV2R6ZEc5eUxXSjFiR3dnSjNOMFlYSjBhVzVuSWo0OGMzUjViR1UrSUR4amIyNW1hV2R6ZEc5eUlITjBlV3hsUFNKdWIyNWxJaUJtYVd4c1BTSjFjbXdvSTJ4cGJtVmhjaTVwYm1SbGVDMWpiMjVtYVdkemRHOXlMV0oxYkd3Z0ozTjBZWEowYVc1bklqNDhMM04yWno0PSIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIgogICAgfQogIF0KfQ==">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
-    <!-- Palm tree icon for other devices -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
     <style>
         :root {
             --bg-color: #ffffff;
@@ -45,17 +43,23 @@
             --area-6: #33FFF3;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: all 0.3s ease;
+            min-height: 100vh;
+            padding: 20px;
+            font-size: var(--font-size-large);
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            font-size: var(--font-size-large);
         }
         
         .container {
@@ -70,11 +74,13 @@
         
         h1 {
             color: var(--primary-color);
+            text-align: center;
             margin-bottom: 5px;
             font-size: 2.2rem;
         }
         
         .subtitle {
+            text-align: center;
             color: var(--text-color);
             opacity: 0.8;
             margin-bottom: 20px;
@@ -177,15 +183,6 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-        }
-        
-        /* 日本語タイトルとサブタイトルの中央揃えを強化 */
-        .language-content.japanese h1 {
-            letter-spacing: 0.1em;
-        }
-        
-        .language-content.japanese .subtitle {
-            letter-spacing: 0.05em;
         }
         
         .spot-button {
@@ -341,6 +338,34 @@
             text-decoration: underline;
         }
         
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+        
+        .install-btn i {
+            font-size: 1.2em;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -372,10 +397,42 @@
                 --font-size-xlarge: 1.2rem;
             }
         }
+        
+        /* 日本語タイトルとサブタイトルの中央揃えを強化 */
+        .language-content.japanese h1 {
+            letter-spacing: 0.1em;
+        }
+        
+        .language-content.japanese .subtitle {
+            letter-spacing: 0.05em;
+        }
+        
+        /* PWAスタイル調整 */
+        @media (display-mode: standalone) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            
+            .install-btn {
+                display: none;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <button class="install-btn" id="installButton">
+        <i class="fas fa-download"></i>
+        <span class="english">Install App</span>
+        <span class="japanese">アプリをインストール</span>
+    </button>
+
     <div class="container">
         <div class="controls">
             <div class="language-content english active">
@@ -451,7 +508,7 @@
                     description: "沖縄北部のジャングル地帯で、豊かな生物多様性と美しい自然スポットで知られています。手つかずの森、滝、風光明媚な岬を探索しましょう。"
                 },
                 spots: ['cape-hedo', 'daisekirinzan', 'taa-falls', 'yambaru-wildlife'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfBuhn8xBlbTFwh4LyYeQvpl704gnWk2MWAaGUGD2TNhtcx3q8pBMompw&s=10"
+                image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'motobu': {
                 en: {
@@ -463,7 +520,7 @@
                     description: "沖縄美ら海水族館や歴史遺跡で有名です。海洋生物好きや歴史愛好家には必見のエリアです。"
                 },
                 spots: ['churaumi-aquarium', 'bise-fukugi', 'kouri-island', 'nakijin-castle'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQg99IaXCU0K_p_liR6wsCCUZo8OsYrgf_WZnnWvgtNAOFvXjKJJx9-BU&s=10"
+                image: "https://images.unsplash.com/photo-1588591795085-49d8a9036d01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'north-resorts': {
                 en: {
@@ -475,7 +532,7 @@
                     description: "高級リゾート、美しいサンゴ礁、素晴らしいシュノーケリングスポットが特徴です。高級施設を備えたリラックスできるビーチバケーションに最適です。"
                 },
                 spots: ['manza-beach', 'busena-marine-park', 'zampa-misaki', 'oist-campus'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM5BPy42BdHmWJVfYc1mSWgF7yNq29FGBnnvKDR0qBgaKshhW_oUhfIL04&s=10"
+                image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1464&q=80"
             },
             'central': {
                 en: {
@@ -487,7 +544,7 @@
                     description: "歴史的な遺跡や伝統的な村、活気ある都市生活がある沖縄の文化的中心地です。独特の琉球文化を体験できます。"
                 },
                 spots: ['kaichu-road', 'koza', 'american-village', 'ara-beach'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOJFBpB3cA218barOv4rakGsYkaHJHi3a99kLZ81k8WzYkb73LvnAVJ78&s=10"
+                image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1464&q=80"
             },
             'naha': {
                 en: {
@@ -499,7 +556,7 @@
                     description: "首里城などの歴史的建造物、ショッピング、飲食店がある県都です。さらに、ターコイズブルーの海が美しい慶良間諸島もあります。"
                 },
                 spots: ['kokusai-street', 'shuri-castle', 'kerama-islands', 'tomari-ichiba'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRWraguwGyogQJ4RWg7pK8w-af-Fp6Xf6hJ3jb5UiAydsCZr0VNH3hvEJn&s=10"
+                image: "https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'southern': {
                 en: {
@@ -511,7 +568,7 @@
                     description: "平和記念公園、息をのむような海岸線、ユニークなビーチが特徴の地域です。重要な史跡と自然美が組み合わさっています。"
                 },
                 spots: ['peace-memorial-park', 'chinen-misaki', 'okinawa-world', 'mibaru-beach'],
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1eErRBRgKbVyBUIVtX4kFud1nxxrJC_MaRLAhT1W3Qa-C-gBsl61jNBU&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             }
         };
 
@@ -531,7 +588,7 @@
                     description: "沖縄本島最北端の岬で、東シナ海の壮大な断崖の景色が広がります。ドラマチックな海の景色と写真撮影に最適なスポットです。",
                     tips: "混雑を避けたいなら早朝に訪れ、美しい日の出を楽しみましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReT6B22lFXwdg1Fh7INpnpeYOg6hfuPmL3Z0lQkk7cuEMNi4i0X4MAoVo&s=10"
+                image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'daisekirinzan': {
                 en: {
@@ -546,7 +603,7 @@
                     description: "ユニークな岩の形成物と緑豊かな亜熱帯の森が特徴の地質公園です。海岸線の息をのむような景色が楽しめる遊歩道があります。",
                     tips: "遊歩道は約60-90分かかります - 快適な靴を履きましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4DwTYM-ZeYsYRY1C8Y1U6_6pTz40riNwwH40-Hwsvus8d9IW_pHk0O88&s=10"
+                image: "https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'taa-falls': {
                 en: {
@@ -561,7 +618,7 @@
                     description: "ヤンバルの森にある美しい滝で、風光明媚なハイキングコースでアクセスできます。周囲の緑豊かな植物が静かな雰囲気を作り出しています。",
                     tips: "雨の後は道が滑りやすいので、適切なハイキングシューズを履きましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-0AoLrTovn2YEzwClJOLYpEBb5ZBSatkupSXMtnipifIr6fnOA1m6Obxh&s=10"
+                image: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1464&q=80"
             },
             'yambaru-wildlife': {
                 en: {
@@ -576,7 +633,7 @@
                     description: "ヤンバルクイナを含む多くの固有種が生息しています。緑豊かな森を探索し、ユニークな動植物を発見しましょう。",
                     tips: "レアな野生生物を見つけるチャンスを最大化するためにガイドツアーに参加しましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo9S0y20YC2pZ65rnhJGXscBUuzyZV2Tiut69WTPqxXrPOJA9P080QHoEr&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             
             // Motobu spots
@@ -593,7 +650,7 @@
                     description: "世界最大級の水族館で、ジンベエザメとマンタが泳ぐ黒潮の海大水槽で有名です。ドルフィンショーもお見逃しなく！",
                     tips: "混雑を避けるために早めに到着し、オンラインで事前にチケットを購入することを検討しましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1vkVXUK-fGeuILfU1R-1bTq7xmIBR3Aw5PoW1EBB6PcSzkB6noQZFrfx&s=10"
+                image: "https://images.unsplash.com/photo-1588591795085-49d8a9036d01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'bise-fukugi': {
                 en: {
@@ -608,7 +665,7 @@
                     description: "300年以上の歴史を持つ古いフクギの木が並ぶ1kmの風光明媚な道路です。道は美しい人里離れたビーチに通じています。",
                     tips: "美しい光と少ない人混みを楽しむには、早朝または夕方に訪れるのがベストです。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdorAr3MwOt-vdQDhVN7z7sH0_Fam2tORwKaXZhH2yi3nIdb5PId_w3dk&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'kouri-island': {
                 en: {
@@ -623,7 +680,7 @@
                     description: "美しい2kmの橋で結ばれた小さな島で、ハート形の岩と透き通った海で知られています。ロマンチックな逃避行に最適です。",
                     tips: "古宇利海洋タワーに訪れ、周辺の島々のパノラマビューを楽しみましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MzF8v2Xj88RPNhvTNklsAQ5kh-kd3BJMq_65X7NLoYr7eUiFMKNQqflA&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'nakijin-castle': {
                 en: {
@@ -638,7 +695,7 @@
                     description: "ユネスコ世界遺産に登録された印象的な城跡で、パノラマビューが楽しめます。14世紀には北山王国の拠点でした。",
                     tips: "桜の季節（1月下旬から2月上旬）に訪れると、壮観な景色を見られます。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYoWlyoHMUYEq3BLRxy4cRExvYBYKnlNIqC2JmnlhivFvn9ZEkv1Tm71x&s=10"
+                image: "https://images.unsplash.com/photo-1586016413664-864c0dd76f53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             
             // North-Central spots
@@ -655,7 +712,7 @@
                     description: "白い砂と透明な海が美しいビーチで、シュノーケリングやマリンスポーツに最適です。ANAインターコンチネンタル万座ビーチリゾートの一部です。",
                     tips: "緩やかな傾斜と清潔な施設があるため、子供連れの家族に最適です。"
                 },
-                image: "https://www.google.com/search?client=ms-android-xiaomi-rvo3&sca_esv=aa908afd3e505705&sxsrf=AHTn8zodXx-38ayjp3ubfd6NLjxdH-8Y1Q:1746100074564&q=%E4%B8%87%E5%BA%A7%E3%83%93%E3%83%BC%E3%83%81&udm=2&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBjLjqIC1CYKD9D-DQAQS3Z44LBK6yTXN_5587Z3ya9D76ZZ826DWN9d1Qgzn83HTxrcYhqHek2wyz6LjLIfhd1z6FcazcqVyfzLtnqH3BTwu-kJS9oUDx9LpXVEu0aiuYcaBvYvaPTf_zzX4ygmfdFIfWdzWFyzCia5HOLrpG43vxQ0TGg&sa=X&ved=2ahUKEwje8r7VmYKNAxXCs1YBHUMiK6QQtKgLegQIKxAB&biw=392&bih=736&dpr=2.75"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'busena-marine-park': {
                 en: {
@@ -670,7 +727,7 @@
                     description: "ユニークな海中展望塔とグラスボートツアーで色とりどりのサンゴ礁を見学できます。濡れたくないけど海洋生物を見たい人に最適です。",
                     tips: "近くのビーチと組み合わせて、一日中海の探検を楽しみましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEy0RUnB1LmOrJWjsfzEI2EDYGZZ1prxwihUECbCx1CI-bQ_SpTaESn_ZJ&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'zampa-misaki': {
                 en: {
@@ -685,7 +742,7 @@
                     description: "ドラマチックな断崖と有名なハート形の岩がある美しい岬です。東シナ海に沈む夕日を見るのに人気のスポットです。",
                     tips: "風が強いことが多いので、ジャケットを持参し、帽子が飛ばないように注意しましょう！"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV70pEqZpPwyu0po00S8sRZi1arKp_EGZhNcqctVBZvzpOFiFqleLS1aen&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'oist-campus': {
                 en: {
@@ -700,7 +757,7 @@
                     description: "沖縄科学技術大学院大学は、印象的な建築と海の景色が楽しめる美しい現代的なキャンパスです。施設のガイドツアーを提供しています。",
                     tips: "ツアーのスケジュールと予約要件については事前にウェブサイトを確認しましょう。"
                 },
-                image: "https://www.oist.jp/themes/custom/server_theme/dist/images/oist-campus-aerial-2019.jpg"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             
             // Central spots
@@ -715,9 +772,9 @@
                     name: "海中道路",
                     type: "風景ドライブ",
                     description: "本島と平安座島を結ぶ美しい4.7kmの堤防道路で、両側に素晴らしい海の景色が広がります。途中には探索できる小さな島がいくつかあります。",
-                    tips: "休憩所に停車して景色を楽しみ、地��の露店でスナックを試してみましょう。"
+                    tips: "休憩所に停車して景色を楽しみ、地元の露店でスナックを試してみましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnO-nYff3BIBpqYeTaypRGbUEeS_dyW0Tbtkj6BHuzn0Od04I9QrRKbKk&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'koza': {
                 en: {
@@ -732,7 +789,7 @@
                     description: "アメリカ文化の影響を受けた沖縄の中心地で、活気あるナイトライフ、ライブ音楽会場、ユニークなショッピングが楽しめます。",
                     tips: "バーやライブ会場の最高の選択肢を求めてゲート2ストリートを訪れましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FRAHAcoA7lH0zSQA4oM_VBC7Zz4qo9-BhJXn6GzZFFDbuFJEoX3mJCmW&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'american-village': {
                 en: {
@@ -747,7 +804,7 @@
                     description: "アメリカンをテーマにしたカラフルなショッピング・エンターテインメント複合施設で、レストラン、ショップ、観覧車があります。お土産や夜のエンターテインメントに最適です。",
                     tips: "ライトアップされてロマンチックな雰囲気になる夜間に訪れましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlmufLHDJbj6zn84aSwGI69Do3x9cFJuGmuck7N79ONn7fILemAJt9WI&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'ara-beach': {
                 en: {
@@ -762,7 +819,7 @@
                     description: "穏やかな海と美しい白砂が特徴のビーチで、家族連れに最適です。夕日とマリンスポーツ施設で知られています。",
                     tips: "週末は混雑する可能性があるので、より静かな体験をしたいなら平日に訪れましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne6loJ3KWnrU0wVI0H7j-QruiFezVB4RcPerouLUQly8QxtexuPPTQeI&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             
             // Naha spots
@@ -779,7 +836,7 @@
                     description: "那覇のメインストリートで、レストラン、ショップ、市場が並ぶ繁華街です。沖縄の都市生活と文化の中心地です。",
                     tips: "より本格的な地元の体験をするには、路地やアーケード市場を訪れましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaVkP5EWjOugoXnSv82sdnGlTTJTEHiBR3PkIDBfLMCiH2XNHNUioma6Xr&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'shuri-castle': {
                 en: {
@@ -794,7 +851,7 @@
                     description: "琉球王国の王宮で、ユネスコ世界遺産に登録されています。2019年の火災で被害を受けましたが、復元工事が進行中で、敷地はまだ訪れる価値があります。",
                     tips: "復元の進捗状況とどのエリアが公開されているか、事前に確認しましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjRNaDXzYA8O-FGhfzWszTyLfs9zgzicD2F4pTrPGRpUnsf6O_cQbNaWae&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'kerama-islands': {
                 en: {
@@ -809,7 +866,7 @@
                     description: "透き通った海と素晴らしいシュノーケリング・ダイビングスポットで知られる小島群です。海の透明度が非常に高く、「ケラマブルー」と呼ばれています。",
                     tips: "那覇から日帰り旅行が可能ですが、よりリラックスした体験のために一泊することを検討しましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4WxB1dznD5z9m7BM9H1Pzo9QbtkySF00NYSmZ8NVm50glzdKkXGr3DgBm&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'tomari-ichiba': {
                 en: {
@@ -824,7 +881,7 @@
                     description: "活気ある魚市場で、新鮮な海産物を購入し、その場で調理してもらえます。もずくやウミブドウ（海ぶどう）などの沖縄の特産品を試してみましょう。",
                     tips: "最高の品揃えのために早めに行きましょう - 多くの露店は午後早くには閉まります。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeQgmS2Nd2-CWGod73NUqTv82jbOL096lpQ21zKjKCoXf-Whl-MuO-9qTm&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             
             // Southern spots
@@ -841,7 +898,7 @@
                     description: "沖縄戦で亡くなった人々に捧げられた公園で、感動的な記念碑、博物館、そしてすべての犠牲者の名前が刻まれた「平和の礎」があります。",
                     tips: "博物館は重要な歴史的文脈を提供しますが、小さな子供には強い内容かもしれません。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmQt4EF-1cv42XfJCWpU1vnzXWLXH_W3yd22xpWhgIHRFoXbkX62WJDoo&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'chinen-misaki': {
                 en: {
@@ -856,7 +913,7 @@
                     description: "素晴らしい海の景色と、琉球の宗教における聖地としての重要な歴史的意義を持つ美しい岬です。断崖からは太平洋のドラマチックな景色が楽しめます。",
                     tips: "近くの沖縄平和祈念堂と組み合わせて訪れましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw0ojYWHxNa_0p-_XERaQYvTw8iraryXslxCAji644ce67FEMUTStXll8Q&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'okinawa-world': {
                 en: {
@@ -871,7 +928,7 @@
                     description: "伝統的な琉球家屋や工芸品、壮観な玉泉洞（日本最大級の鍾乳洞の一つ）がある文化テーマパークです。",
                     tips: "入場料に含まれる伝統的なエイサー舞踊のパフォーマンスを見ましょう。"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_FUhpuL2PFHfhmc-qeBt8ESsHcNFOMUpcDY5QDZrzDc83J0aVgaOFWNz9&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             },
             'mibaru-beach': {
                 en: {
@@ -886,7 +943,7 @@
                     description: "星の砂と呼ばれる星形の微小な海洋生物の化石がある美しいビーチです。この砂は幸運をもたらすと言われています。",
                     tips: "砂をよく見てみましょう - 星の形は実際には微小な生物の化石です！"
                 },
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-6jtLYAdSRJuHixF1TUso4zzAYtGNZuGuUlJzfUk9dOF8Z5K0aqZcFxQ&s=10"
+                image: "https://images.unsplash.com/photo-1593692909680-2e5b00a0a899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
             }
         };
 
@@ -894,6 +951,7 @@
         let currentView = 'area'; // 'area', 'spots', or 'detail'
         let currentArea = null;
         let currentSpot = null;
+        let deferredPrompt;
 
         function showAreaInfo(areaId) {
             currentView = 'area';
@@ -1097,57 +1155,100 @@
         // Initialize on page load
         init();
 
+        // PWA Installation
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Show the install button
+            document.getElementById('installButton').style.display = 'flex';
+        });
+
+        document.getElementById('installButton').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                // We've used the prompt, and can't use it again, throw it away
+                deferredPrompt = null;
+                // Hide the install button
+                document.getElementById('installButton').style.display = 'none';
+            }
+        });
+
         // Register Service Worker for PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful');
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, err => {
                     console.log('ServiceWorker registration failed: ', err);
                 });
             });
         }
+
+        // Check if app is launched as PWA
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.getElementById('installButton').style.display = 'none';
+        }
     </script>
 
     <script>
         // Inline Service Worker for PWA
-        const swCode = `
-            const CACHE_NAME = 'okinawa-travel-guide-v1';
-            const urlsToCache = [
-                '/',
-                '/index.html',
-                '/styles.css',
-                '/script.js'
-            ];
-
-            self.addEventListener('install', event => {
-                event.waitUntil(
-                    caches.open(CACHE_NAME)
-                        .then(cache => {
-                            return cache.addAll(urlsToCache);
-                        })
-                );
-            });
-
-            self.addEventListener('fetch', event => {
-                event.respondWith(
-                    caches.match(event.request)
-                        .then(response => {
-                            if (response) {
-                                return response;
-                            }
-                            return fetch(event.request);
-                        })
-                );
-            });
-        `;
-
-        // Create a Blob with the service worker code
-        const blob = new Blob([swCode], { type: 'application/javascript' });
-        const swUrl = URL.createObjectURL(blob);
-
-        // Register the service worker
         if ('serviceWorker' in navigator) {
+            const swCode = `
+                const CACHE_NAME = 'okinawa-travel-guide-v2';
+                const urlsToCache = [
+                    '/',
+                    '/index.html',
+                    '/styles.css',
+                    '/script.js'
+                ];
+
+                self.addEventListener('install', event => {
+                    event.waitUntil(
+                        caches.open(CACHE_NAME)
+                            .then(cache => {
+                                return cache.addAll(urlsToCache);
+                            })
+                    );
+                });
+
+                self.addEventListener('fetch', event => {
+                    event.respondWith(
+                        caches.match(event.request)
+                            .then(response => {
+                                if (response) {
+                                    return response;
+                                }
+                                return fetch(event.request);
+                            })
+                    );
+                });
+
+                self.addEventListener('activate', event => {
+                    const cacheWhitelist = [CACHE_NAME];
+                    event.waitUntil(
+                        caches.keys().then(cacheNames => {
+                            return Promise.all(
+                                cacheNames.map(cacheName => {
+                                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                        return caches.delete(cacheName);
+                                    }
+                                })
+                            );
+                        })
+                    );
+                });
+            `;
+
+            // Create a Blob with the service worker code
+            const blob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(blob);
+
+            // Register the service worker
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register(swUrl).then(function(registration) {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
