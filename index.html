@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okinawa Travel Guide</title>
+    <meta name="theme-color" content="#0066cc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    <!-- Palm tree icon for iOS -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
+    <!-- Palm tree icon for other devices -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2300a0e9'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>🌴</text></svg>">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-color: #0066cc;
+            --secondary-color: #e6f2ff;
+            --card-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --area-1: #ff6b6b;
+            --area-2: #4ecdc4;
+            --area-3: #45b7d1;
+            --area-4: #ffbe0b;
+            --area-5: #ff9f1c;
+            --area-6: #ee4266;
+            --font-size-normal: 1rem;
+            --font-size-large: 1.2rem;
+            --font-size-xlarge: 1.4rem;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f8f9fa;
+            --primary-color: #4da6ff;
+            --secondary-color: #003366;
+            --card-bg: #2d2d2d;
+            --border-color: #495057;
+            --area-1: #FF5733;
+            --area-2: #33FF57;
+            --area-3: #3357FF;
+            --area-4: #F3FF33;
+            --area-5: #FF33F3;
+            --area-6: #33FFF3;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: var(--font-size-large);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-bottom: 20px;
+            font-size: var(--font-size-large);
+        }
+        
+        .okinawa-map {
+            width: 100%;
+            height: 500px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .area {
+            position: absolute;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 2px solid rgba(255,255,255,0.3);
+            font-size: var(--font-size-large);
+        }
+        
+        .area:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+            border-color: rgba(255,255,255,0.7);
+        }
+        
+        .area-1 { background-color: var(--area-1); left: 50%; top: 5%; width: 30%; height: 30%; }
+        .area-2 { background-color: var(--area-2); left: 15%; top: 20%; width: 35%; height: 15%; }
+        .area-3 { background-color: var(--area-3); left: 40%; top: 35%; width: 25%; height: 18%; }
+        .area-4 { background-color: var(--area-4); left: 30%; top: 50%; width: 60%; height: 15%; }
+        .area-5 { background-color: var(--area-5); left: 25%; top: 65%; width: 30%; height: 15%; }
+        .area-6 { background-color: var(--area-6); left: 20%; top: 80%; width: 50%; height: 15%; }
+        
+        #info-box {
+            padding: 20px;
+            background: var(--secondary-color);
+            border-radius: 10px;
+            margin-top: 25px;
+            min-height: 120px;
+            transition: all 0.3s ease;
+            font-size: var(--font-size-large);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .mode-toggle, .lang-toggle {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: var(--font-size-normal);
+        }
+        
+        .mode-toggle:hover, .lang-toggle:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+        }
+        
+        .japanese {
+            font-size: var(--font-size-normal);
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-top: 3px;
+            font-style: normal;
+        }
+        
+        .dark-mode .japanese {
+            opacity: 0.7;
+        }
+        
+        .spot-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--font-size-large);
+        }
+        
+        .spot-button:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .spot-button i {
+            font-size: 1.1em;
+        }
+        
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .spot-item {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: var(--font-size-large);
+        }
+        
+        .spot-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: var(--secondary-color);
+        }
+        
+        .spot-item h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+            font-size: var(--font-size-xlarge);
+        }
+        
+        .spot-item p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: var(--font-size-normal);
+        }
+        
+        .spot-detail {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            font-size: var(--font-size-large);
+        }
+        
+        .spot-detail h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .spot-detail .type {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: var(--font-size-normal);
+        }
+        
+        .back-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--font-size-large);
+        }
+        
+        .back-button:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+        }
+        
+        .spot-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .spot-tips {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary-color);
+            font-size: var(--font-size-large);
+        }
+        
+        .spot-tips strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: var(--font-size-xlarge);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: var(--font-size-normal);
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .language-content {
+            display: none;
+        }
+        
+        .language-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .okinawa-map {
+                height: 400px;
+            }
+            
+            .spot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            
+            .mode-toggle, .lang-toggle {
+                flex-grow: 1;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            :root {
+                --font-size-normal: 0.9rem;
+                --font-size-large: 1rem;
+                --font-size-xlarge: 1.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h1>
+                <span class="english">Okinawa Travel Guide</span>
+                <span class="japanese">沖縄観光ガイド</span>
+            </h1>
+            <div class="button-group">
+                <button class="mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                    <span class="english">Dark Mode</span>
+                    <span class="japanese">ダークモード</span>
+                </button>
+                <button class="lang-toggle" onclick="toggleLanguage()">
+                    <i class="fas fa-language"></i>
+                    <span class="english">日本語</span>
+                    <span class="japanese">English</span>
+                </button>
+            </div>
+        </div>
+        
+        <p class="subtitle english">Discover the best of Okinawa's attractions</p>
+        <p class="subtitle japanese">沖縄の魅力を発見しましょう</p>
+        
+        <div class="okinawa-map">
+            <!-- Area blocks -->
+            <div class="area area-1" onclick="showAreaInfo('yanbaru')">
+                <span class="english">Yanbaru</span>
+                <span class="japanese">ヤンバル</span>
+            </div>
+            <div class="area area-2" onclick="showAreaInfo('motobu')">
+                <span class="english">Motobu</span>
+                <span class="japanese">本部半島</span>
+            </div>
+            <div class="area area-3" onclick="showAreaInfo('north-resorts')">
+                <span class="english">North Resorts</span>
+                <span class="japanese">北部リゾート</span>
+            </div>
+            <div class="area area-4" onclick="showAreaInfo('central')">
+                <span class="english">Central</span>
+                <span class="japanese">中部</span>
+            </div>
+            <div class="area area-5" onclick="showAreaInfo('naha')">
+                <span class="english">Naha Area</span>
+                <span class="japanese">那覇周辺</span>
+            </div>
+            <div class="area area-6" onclick="showAreaInfo('southern')">
+                <span class="english">South</span>
+                <span class="japanese">南部</span>
+            </div>
+        </div>
+        
+        <div id="info-box">
+            <div class="language-content english active">
+                Click on an area to show information
+            </div>
+            <div class="language-content japanese">
+                エリアをクリックすると情報が表示されます
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="language-content english active">Contact me<br><a href="mailto:mementomorikatsu@gmail.com">mementomorikatsu@gmail.com</a></div>
+        <div class="language-content japanese">連絡先<br><a href="mailto:mementomorikatsu@gmail.com">mementomorikatsu@gmail.com</a></div>
+    </footer>
+
+    <script>
+        // Area information in both languages
+        const areaInfo = {
+            'yanbaru': {
+                en: {
+                    title: "Yanbaru Region",
+                    description: "The northern jungle area of Okinawa, known for its rich biodiversity and beautiful nature spots. Explore untouched forests, waterfalls, and scenic capes."
+                },
+                ja: {
+                    title: "ヤンバル地域（国頭村・東村）",
+                    description: "沖縄北部のジャングル地帯で、豊かな生物多様性と美しい自然スポットで知られています。手つかずの森、滝、風光明媚な岬を探索しましょう。"
+                },
+                spots: ['cape-hedo', 'daisekirinzan', 'taa-falls', 'yambaru-wildlife'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfBuhn8xBlbTFwh4LyYeQvpl704gnWk2MWAaGUGD2TNhtcx3q8pBMompw&s=10"
+            },
+            'motobu': {
+                en: {
+                    title: "Motobu Peninsula",
+                    description: "Famous for the Okinawa Churaumi Aquarium and historical sites. A must-visit for marine life enthusiasts and history lovers."
+                },
+                ja: {
+                    title: "本部半島（名護市・本部町・今帰仁村）",
+                    description: "沖縄美ら海水族館や歴史遺跡で有名です。海洋生物好きや歴史愛好家には必見のエリアです。"
+                },
+                spots: ['churaumi-aquarium', 'bise-fukugi', 'kouri-island', 'nakijin-castle'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQg99IaXCU0K_p_liR6wsCCUZo8OsYrgf_WZnnWvgtNAOFvXjKJJx9-BU&s=10"
+            },
+            'north-resorts': {
+                en: {
+                    title: "North Resorts",
+                    description: "Luxury resorts, beautiful coral reefs, and excellent snorkeling spots. The perfect area for a relaxing beach vacation with high-end amenities."
+                },
+                ja: {
+                    title: "北部リゾート（読谷村・恩納村）",
+                    description: "高級リゾート、美しいサンゴ礁、素晴らしいシュノーケリングスポットが特徴です。高級施設を備えたリラックスできるビーチバケーションに最適です。"
+                },
+                spots: ['manza-beach', 'busena-marine-park', 'zampa-misaki', 'oist-campus'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM5BPy42BdHmWJVfYc1mSWgF7yNq29FGBnnvKDR0qBgaKshhW_oUhfIL04&s=10"
+            },
+            'central': {
+                en: {
+                    title: "Central Region",
+                    description: "Cultural heart of Okinawa with historical sites, traditional villages, and vibrant city life. Experience the unique Ryukyu culture."
+                },
+                ja: {
+                    title: "中部（沖縄市・うるま市・中城村）",
+                    description: "歴史的な遺跡や伝統的な村、活気ある都市生活がある沖縄の文化的中心地です。独特の琉球文化を体験できます。"
+                },
+                spots: ['kaichu-road', 'koza', 'american-village', 'ara-beach'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOJFBpB3cA218barOv4rakGsYkaHJHi3a99kLZ81k8WzYkb73LvnAVJ78&s=10"
+            },
+            'naha': {
+                en: {
+                    title: "Naha Area & Kerama Islands",
+                    description: "The capital city with shopping, dining, and historical sites like Shuri Castle. Plus, the stunning Kerama Islands with their turquoise waters."
+                },
+                ja: {
+                    title: "那覇周辺・慶良間諸島",
+                    description: "首里城などの歴史的建造物、ショッピング、飲食店がある県都です。さらに、ターコイズブルーの海が美しい慶良間諸島もあります。"
+                },
+                spots: ['kokusai-street', 'shuri-castle', 'kerama-islands', 'tomari-ichiba'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRWraguwGyogQJ4RWg7pK8w-af-Fp6Xf6hJ3jb5UiAydsCZr0VNH3hvEJn&s=10"
+            },
+            'southern': {
+                en: {
+                    title: "Southern Region",
+                    description: "Peace memorial parks, stunning coastal views, and unique beaches characterize this area. Important historical sites combined with natural beauty."
+                },
+                ja: {
+                    title: "南部（糸満市・南城市）",
+                    description: "平和記念公園、息をのむような海岸線、ユニークなビーチが特徴の地域です。重要な史跡と自然美が組み合わさっています。"
+                },
+                spots: ['peace-memorial-park', 'chinen-misaki', 'okinawa-world', 'mibaru-beach'],
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1eErRBRgKbVyBUIVtX4kFud1nxxrJC_MaRLAhT1W3Qa-C-gBsl61jNBU&s=10"
+            }
+        };
+
+        // Spot information for each area
+        const spotInfo = {
+            // Yanbaru spots
+            'cape-hedo': {
+                en: {
+                    name: "Cape Hedo",
+                    type: "Scenic Cape",
+                    description: "The northernmost point of Okinawa Island with spectacular cliff views of the East China Sea. A perfect spot for dramatic ocean views and photography.",
+                    tips: "Visit early morning for fewer crowds and beautiful sunrise views."
+                },
+                ja: {
+                    name: "辺戸岬",
+                    type: "風光明媚な岬",
+                    description: "沖縄本島最北端の岬で、東シナ海の壮大な断崖の景色が広がります。ドラマチックな海の景色と写真撮影に最適なスポットです。",
+                    tips: "混雑を避けたいなら早朝に訪れ、美しい日の出を楽しみましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReT6B22lFXwdg1Fh7INpnpeYOg6hfuPmL3Z0lQkk7cuEMNi4i0X4MAoVo&s=10"
+            },
+            'daisekirinzan': {
+                en: {
+                    name: "Asmui Spiritual Park(Daisekirinzan)",
+                    type: "Nature Park",
+                    description: "A stunning geological park featuring unique rock formations and lush subtropical forest. Offers walking trails with breathtaking views of the coastline.",
+                    tips: "The walking course takes about 60-90 minutes - wear comfortable shoes."
+                },
+                ja: {
+                    name: "アスムイスピリチュアルパーク(大石林山)",
+                    type: "自然公園",
+                    description: "ユニークな岩の形成物と緑豊かな亜熱帯の森が特徴の地質公園です。海岸線の息をのむような景色が楽しめる遊歩道があります。",
+                    tips: "遊歩道は約60-90分かかります - 快適な靴を履きましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4DwTYM-ZeYsYRY1C8Y1U6_6pTz40riNwwH40-Hwsvus8d9IW_pHk0O88&s=10"
+            },
+            'taa-falls': {
+                en: {
+                    name: "Taa Falls",
+                    type: "Waterfall",
+                    description: "A beautiful waterfall in the Yanbaru forest, accessible via a scenic hiking trail. The surrounding lush vegetation creates a serene atmosphere.",
+                    tips: "Wear proper hiking shoes as the trail can be slippery after rain."
+                },
+                ja: {
+                    name: "ター滝",
+                    type: "滝",
+                    description: "ヤンバルの森にある美しい滝で、風光明媚なハイキングコースでアクセスできます。周囲の緑豊かな植物が静かな雰囲気を作り出しています。",
+                    tips: "雨の後は道が滑りやすいので、適切なハイキングシューズを履きましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-0AoLrTovn2YEzwClJOLYpEBb5ZBSatkupSXMtnipifIr6fnOA1m6Obxh&s=10"
+            },
+            'yambaru-wildlife': {
+                en: {
+                    name: "Yambaru Wildlife",
+                    type: "Nature Reserve",
+                    description: "Home to many endemic species including the endangered Okinawa rail. Explore the lush forests and discover unique flora and fauna.",
+                    tips: "Join a guided tour to maximize your chances of spotting rare wildlife."
+                },
+                ja: {
+                    name: "やんばるの野生生物",
+                    type: "自然保護区",
+                    description: "ヤンバルクイナを含む多くの固有種が生息しています。緑豊かな森を探索し、ユニークな動植物を発見しましょう。",
+                    tips: "レアな野生生物を見つけるチャンスを最大化するためにガイドツアーに参加しましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo9S0y20YC2pZ65rnhJGXscBUuzyZV2Tiut69WTPqxXrPOJA9P080QHoEr&s=10"
+            },
+            
+            // Motobu spots
+            'churaumi-aquarium': {
+                en: {
+                    name: "Churaumi Aquarium",
+                    type: "Aquarium",
+                    description: "One of the largest aquariums in the world, famous for its massive Kuroshio Tank housing whale sharks and manta rays. Don't miss the dolphin show!",
+                    tips: "Arrive early to avoid crowds and consider purchasing tickets online in advance."
+                },
+                ja: {
+                    name: "美ら海水族館",
+                    type: "水族館",
+                    description: "世界最大級の水族館で、ジンベエザメとマンタが泳ぐ黒潮の海大水槽で有名です。ドルフィンショーもお見逃しなく！",
+                    tips: "混雑を避けるために早めに到着し、オンラインで事前にチケットを購入することを検討しましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1vkVXUK-fGeuILfU1R-1bTq7xmIBR3Aw5PoW1EBB6PcSzkB6noQZFrfx&s=10"
+            },
+            'bise-fukugi': {
+                en: {
+                    name: "Bise Fukugi Tree Road",
+                    type: "Scenic Walk",
+                    description: "A picturesque 1km road lined with ancient Fukugi trees, some over 300 years old. The path leads to beautiful secluded beaches.",
+                    tips: "Best visited in early morning or late afternoon for beautiful light and fewer people."
+                },
+                ja: {
+                    name: "備瀬のフクギ並木",
+                    type: "風景散歩道",
+                    description: "300年以上の歴史を持つ古いフクギの木が並ぶ1kmの風光明媚な道路です。道は美しい人里離れたビーチに通じています。",
+                    tips: "美しい光と少ない人混みを楽しむには、早朝または夕方に訪れるのがベストです。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdorAr3MwOt-vdQDhVN7z7sH0_Fam2tORwKaXZhH2yi3nIdb5PId_w3dk&s=10"
+            },
+            'kouri-island': {
+                en: {
+                    name: "Kouri Island",
+                    type: "Island",
+                    description: "A small island connected by a beautiful 2km bridge, known for its heart-shaped rocks and crystal clear waters. Perfect for a romantic getaway.",
+                    tips: "Visit the Kouri Ocean Tower for panoramic views of the surrounding islands."
+                },
+                ja: {
+                    name: "古宇利島",
+                    type: "島",
+                    description: "美しい2kmの橋で結ばれた小さな島で、ハート形の岩と透き通った海で知られています。ロマンチックな逃避行に最適です。",
+                    tips: "古宇利海洋タワーに訪れ、周辺の島々のパノラマビューを楽しみましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MzF8v2Xj88RPNhvTNklsAQ5kh-kd3BJMq_65X7NLoYr7eUiFMKNQqflA&s=10"
+            },
+            'nakijin-castle': {
+                en: {
+                    name: "Nakijin Castle Ruins",
+                    type: "Historic Site",
+                    description: "UNESCO World Heritage Site with impressive castle ruins and panoramic views. Once the seat of the Hokuzan Kingdom in the 14th century.",
+                    tips: "Visit during cherry blossom season (late January to early February) for a spectacular view."
+                },
+                ja: {
+                    name: "今帰仁城跡",
+                    type: "史跡",
+                    description: "ユネスコ世界遺産に登録された印象的な城跡で、パノラマビューが楽しめます。14世紀には北山王国の拠点でした。",
+                    tips: "桜の季節（1月下旬から2月上旬）に訪れると、壮観な景色を見られます。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpYoWlyoHMUYEq3BLRxy4cRExvYBYKnlNIqC2JmnlhivFvn9ZEkv1Tm71x&s=10"
+            },
+            
+            // North-Central spots
+            'manza-beach': {
+                en: {
+                    name: "Manza Beach",
+                    type: "Resort Beach",
+                    description: "Beautiful beach with white sand and clear waters, perfect for snorkeling and water sports. Part of the ANA InterContinental Manza Beach Resort.",
+                    tips: "Great for families with children due to the gentle slope and clean facilities."
+                },
+                ja: {
+                    name: "万座ビーチ",
+                    type: "リゾートビーチ",
+                    description: "白い砂と透明な海が美しいビーチで、シュノーケリングやマリンスポーツに最適です。ANAインターコンチネンタル万座ビーチリゾートの一部です。",
+                    tips: "緩やかな傾斜と清潔な施設があるため、子供連れの家族に最適です。"
+                },
+                image: "https://www.google.com/search?client=ms-android-xiaomi-rvo3&sca_esv=aa908afd3e505705&sxsrf=AHTn8zodXx-38ayjp3ubfd6NLjxdH-8Y1Q:1746100074564&q=%E4%B8%87%E5%BA%A7%E3%83%93%E3%83%BC%E3%83%81&udm=2&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBjLjqIC1CYKD9D-DQAQS3Z44LBK6yTXN_5587Z3ya9D76ZZ826DWN9d1Qgzn83HTxrcYhqHek2wyz6LjLIfhd1z6FcazcqVyfzLtnqH3BTwu-kJS9oUDx9LpXVEu0aiuYcaBvYvaPTf_zzX4ygmfdFIfWdzWFyzCia5HOLrpG43vxQ0TGg&sa=X&ved=2ahUKEwje8r7VmYKNAxXCs1YBHUMiK6QQtKgLegQIKxAB&biw=392&bih=736&dpr=2.75"
+            },
+            'busena-marine-park': {
+                en: {
+                    name: "Busena Marine Park",
+                    type: "Marine Park",
+                    description: "Unique underwater observatory and glass-bottom boat tours to see colorful coral reefs. Great for those who don't want to get wet but want to see marine life.",
+                    tips: "Combine with the nearby beach for a full day of marine exploration."
+                },
+                ja: {
+                    name: "ブセナ海中公園",
+                    type: "海中公園",
+                    description: "ユニークな海中展望塔とグラスボートツアーで色とりどりのサンゴ礁を見学できます。濡れたくないけど海洋生物を見たい人に最適です。",
+                    tips: "近くのビーチと組み合わせて、一日中海の探検を楽しみましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEy0RUnB1LmOrJWjsfzEI2EDYGZZ1prxwihUECbCx1CI-bQ_SpTaESn_ZJ&s=10"
+            },
+            'zampa-misaki': {
+                en: {
+                    name: "Zampa Misaki",
+                    type: "Scenic Cape",
+                    description: "Beautiful cape with dramatic cliffs and a famous heart-shaped rock formation. Popular spot for watching sunsets over the East China Sea.",
+                    tips: "Windy conditions common - bring a jacket and secure your hat!"
+                },
+                ja: {
+                    name: "残波岬",
+                    type: "風光明媚な岬",
+                    description: "ドラマチックな断崖と有名なハート形の岩がある美しい岬です。東シナ海に沈む夕日を見るのに人気のスポットです。",
+                    tips: "風が強いことが多いので、ジャケットを持参し、帽子が飛ばないように注意しましょう！"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV70pEqZpPwyu0po00S8sRZi1arKp_EGZhNcqctVBZvzpOFiFqleLS1aen&s=10"
+            },
+            'oist-campus': {
+                en: {
+                    name: "OIST Campus",
+                    type: "Research Institute",
+                    description: "The Okinawa Institute of Science and Technology is a beautiful modern campus with striking architecture and ocean views. Offers guided tours of its facilities.",
+                    tips: "Check the website in advance for tour schedules and reservation requirements."
+                },
+                ja: {
+                    name: "OISTキャンパス",
+                    type: "研究機関",
+                    description: "沖縄科学技術大学院大学は、印象的な建築と海の景色が楽しめる美しい現代的なキャンパスです。施設のガイドツアーを提供しています。",
+                    tips: "ツアーのスケジュールと予約要件については事前にウェブサイトを確認しましょう。"
+                },
+                image: "https://www.oist.jp/themes/custom/server_theme/dist/images/oist-campus-aerial-2019.jpg"
+            },
+            
+            // Central spots
+            'kaichu-road': {
+                en: {
+                    name: "Kaichu Road (Ocean Road)",
+                    type: "Scenic Drive",
+                    description: "A beautiful 4.7km causeway connecting the main island to Henza Island, with stunning ocean views on both sides. Several small islands along the way to explore.",
+                    tips: "Stop at the rest areas to enjoy the view and try local snacks from vendors."
+                },
+                ja: {
+                    name: "海中道路",
+                    type: "風景ドライブ",
+                    description: "本島と平安座島を結ぶ美しい4.7kmの堤防道路で、両側に素晴らしい海の景色が広がります。途中には探索できる小さな島がいくつかあります。",
+                    tips: "休憩所に停車して景色を楽しみ、地元の露店でスナックを試してみましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnO-nYff3BIBpqYeTaypRGbUEeS_dyW0Tbtkj6BHuzn0Od04I9QrRKbKk&s=10"
+            },
+            'koza': {
+                en: {
+                    name: "Koza (Okinawa City)",
+                    type: "City Area",
+                    description: "The heart of Okinawa's American-influenced culture with vibrant nightlife, live music venues, and unique shopping opportunities.",
+                    tips: "Visit Gate 2 Street for the best selection of bars and live music venues."
+                },
+                ja: {
+                    name: "コザ（沖縄市）",
+                    type: "都市エリア",
+                    description: "アメリカ文化の影響を受けた沖縄の中心地で、活気あるナイトライフ、ライブ音楽会場、ユニークなショッピングが楽しめます。",
+                    tips: "バーやライブ会場の最高の選択肢を求めてゲート2ストリートを訪れましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8FRAHAcoA7lH0zSQA4oM_VBC7Zz4qo9-BhJXn6GzZFFDbuFJEoX3mJCmW&s=10"
+            },
+            'american-village': {
+                en: {
+                    name: "American Village",
+                    type: "Shopping/Entertainment",
+                    description: "A colorful American-themed shopping and entertainment complex with restaurants, shops, and a Ferris wheel. Great for souvenirs and evening entertainment.",
+                    tips: "Visit in the evening when the lights create a romantic atmosphere."
+                },
+                ja: {
+                    name: "アメリカンビレッジ",
+                    type: "ショッピング/エンターテインメント",
+                    description: "アメリカンをテーマにしたカラフルなショッピング・エンターテインメント複合施設で、レストラン、ショップ、観覧車があります。お土産や夜のエンターテインメントに最適です。",
+                    tips: "ライトアップされてロマンチックな雰囲気になる夜間に訪れましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFlmufLHDJbj6zn84aSwGI69Do3x9cFJuGmuck7N79ONn7fILemAJt9WI&s=10"
+            },
+            'ara-beach': {
+                en: {
+                    name: "Araha Beach",
+                    type: "Beach",
+                    description: "A beautiful white sand beach with calm waters, perfect for families. Known for its sunset views and water sports facilities.",
+                    tips: "The beach can get crowded on weekends, so visit on weekdays for a more peaceful experience."
+                },
+                ja: {
+                    name: "アラハビーチ",
+                    type: "ビーチ",
+                    description: "穏やかな海と美しい白砂が特徴のビーチで、家族連れに最適です。夕日とマリンスポーツ施設で知られています。",
+                    tips: "週末は混雑する可能性があるので、より静かな体験をしたいなら平日に訪れましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne6loJ3KWnrU0wVI0H7j-QruiFezVB4RcPerouLUQly8QxtexuPPTQeI&s=10"
+            },
+            
+            // Naha spots
+            'kokusai-street': {
+                en: {
+                    name: "Kokusai Street",
+                    type: "Shopping Street",
+                    description: "Naha's main shopping and entertainment street, lined with restaurants, shops, and markets. The heart of Okinawan urban life and culture.",
+                    tips: "Visit the side streets and covered markets for more authentic local experiences."
+                },
+                ja: {
+                    name: "国際通り",
+                    type: "商店街",
+                    description: "那覇のメインストリートで、レストラン、ショップ、市場が並ぶ繁華街です。沖縄の都市生活と文化の中心地です。",
+                    tips: "より本格的な地元の体験をするには、路地やアーケード市場を訪れましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaVkP5EWjOugoXnSv82sdnGlTTJTEHiBR3PkIDBfLMCiH2XNHNUioma6Xr&s=10"
+            },
+            'shuri-castle': {
+                en: {
+                    name: "Shuri Castle",
+                    type: "Historic Castle",
+                    description: "Former royal palace of the Ryukyu Kingdom, a UNESCO World Heritage Site. Though damaged by fire in 2019, reconstruction is underway and the grounds are still worth visiting.",
+                    tips: "Check ahead for reconstruction progress and which areas are open to visitors."
+                },
+                ja: {
+                    name: "首里城",
+                    type: "歴史的な城",
+                    description: "琉球王国の王宮で、ユネスコ世界遺産に登録されています。2019年の火災で被害を受けましたが、復元工事が進行中で、敷地はまだ訪れる価値があります。",
+                    tips: "復元の進捗状況とどのエリアが公開されているか、事前に確認しましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjRNaDXzYA8O-FGhfzWszTyLfs9zgzicD2F4pTrPGRpUnsf6O_cQbNaWae&s=10"
+            },
+            'kerama-islands': {
+                en: {
+                    name: "Kerama Islands",
+                    type: "Island Group",
+                    description: "Group of small islands known for their crystal clear waters and excellent snorkeling/diving spots. The waters are so clear they're called 'Kerama Blue'.",
+                    tips: "Day trips are available from Naha, but consider staying overnight for a more relaxed experience."
+                },
+                ja: {
+                    name: "慶良間諸島",
+                    type: "島々",
+                    description: "透き通った海と素晴らしいシュノーケリング・ダイビングスポットで知られる小島群です。海の透明度が非常に高く、「ケラマブルー」と呼ばれています。",
+                    tips: "那覇から日帰り旅行が可能ですが、よりリラックスした体験のために一泊することを検討しましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4WxB1dznD5z9m7BM9H1Pzo9QbtkySF00NYSmZ8NVm50glzdKkXGr3DgBm&s=10"
+            },
+            'tomari-ichiba': {
+                en: {
+                    name: "Tomari Fish Market",
+                    type: "Seafood Market",
+                    description: "Lively fish market where you can buy fresh seafood and have it prepared on the spot. Try Okinawan specialties like mozuku seaweed and umibudo (sea grapes).",
+                    tips: "Go early for the best selection - many stalls close by early afternoon."
+                },
+                ja: {
+                    name: "泊いゆまち",
+                    type: "魚市場",
+                    description: "活気ある魚市場で、新鮮な海産物を購入し、その場で調理してもらえます。もずくやウミブドウ（海ぶどう）などの沖縄の特産品を試してみましょう。",
+                    tips: "最高の品揃えのために早めに行きましょう - 多くの露店は午後早くには閉まります。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeQgmS2Nd2-CWGod73NUqTv82jbOL096lpQ21zKjKCoXf-Whl-MuO-9qTm&s=10"
+            },
+            
+            // Southern spots
+            'peace-memorial-park': {
+                en: {
+                    name: "Peace Memorial Park",
+                    type: "Memorial Park",
+                    description: "Dedicated to the lives lost in the Battle of Okinawa, with moving monuments, museums, and the Cornerstone of Peace listing all known casualties.",
+                    tips: "The museum provides important historical context but may be intense for young children."
+                },
+                ja: {
+                    name: "平和祈念公園",
+                    type: "記念公園",
+                    description: "沖縄戦で亡くなった人々に捧げられた公園で、感動的な記念碑、博物館、そしてすべての犠牲者の名前が刻まれた「平和の礎」があります。",
+                    tips: "博物館は重要な歴史的文脈を提供しますが、小さな子供には強い内容かもしれません。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmQt4EF-1cv42XfJCWpU1vnzXWLXH_W3yd22xpWhgIHRFoXbkX62WJDoo&s=10"
+            },
+            'chinen-misaki': {
+                en: {
+                    name: "Chinen Misaki",
+                    type: "Scenic Cape",
+                    description: "Beautiful cape with stunning ocean views and important historical significance as a sacred site in Ryukyuan religion. The cliffs offer dramatic views of the Pacific.",
+                    tips: "Combine with a visit to the nearby Okinawa Peace Prayer Memorial."
+                },
+                ja: {
+                    name: "知念岬",
+                    type: "風光明媚な岬",
+                    description: "素晴らしい海の景色と、琉球の宗教における聖地としての重要な歴史的意義を持つ美しい岬です。断崖からは太平洋のドラマチックな景色が楽しめます。",
+                    tips: "近くの沖縄平和祈念堂と組み合わせて訪れましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw0ojYWHxNa_0p-_XERaQYvTw8iraryXslxCAji644ce67FEMUTStXll8Q&s=10"
+            },
+            'okinawa-world': {
+                en: {
+                    name: "Okinawa World",
+                    type: "Cultural Park",
+                    description: "Cultural theme park featuring traditional Ryukyuan houses, crafts, and the spectacular Gyokusendo Cave - one of Japan's largest limestone caves.",
+                    tips: "Watch the traditional Eisa dance performance included with admission."
+                },
+                ja: {
+                    name: "おきなわワールド",
+                    type: "文化公園",
+                    description: "伝統的な琉球家屋や工芸品、壮観な玉泉洞（日本最大級の鍾乳洞の一つ）がある文化テーマパークです。",
+                    tips: "入場料に含まれる伝統的なエイサー舞踊のパフォーマンスを見ましょう。"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_FUhpuL2PFHfhmc-qeBt8ESsHcNFOMUpcDY5QDZrzDc83J0aVgaOFWNz9&s=10"
+            },
+            'mibaru-beach': {
+                en: {
+                    name: "Mibaru Beach",
+                    type: "Unique Beach",
+                    description: "Beautiful beach with unique 'star sand' made from tiny star-shaped fossils of marine organisms. The sand is said to bring good luck.",
+                    tips: "Look closely at the sand - the star shapes are actually fossils of tiny organisms!"
+                },
+                ja: {
+                    name: "新原ビーチ",
+                    type: "ユニークなビーチ",
+                    description: "星の砂と呼ばれる星形の微小な海洋生物の化石がある美しいビーチです。この砂は幸運をもたらすと言われています。",
+                    tips: "砂をよく見てみましょう - 星の形は実際には微小な生物の化石です！"
+                },
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-6jtLYAdSRJuHixF1TUso4zzAYtGNZuGuUlJzfUk9dOF8Z5K0aqZcFxQ&s=10"
+            }
+        };
+
+        let currentLanguage = 'en';
+        let currentView = 'area'; // 'area', 'spots', or 'detail'
+        let currentArea = null;
+        let currentSpot = null;
+
+        function showAreaInfo(areaId) {
+            currentView = 'area';
+            currentArea = areaId;
+            currentSpot = null;
+            
+            const info = areaInfo[areaId][currentLanguage];
+            
+            let infoHTML = `
+                <div class="language-content english ${currentLanguage === 'en' ? 'active' : ''}">
+                    <h3>${info.title}</h3>
+                    <p>${info.description}</p>
+                    ${areaInfo[areaId].image ? `<img src="${areaInfo[areaId].image}" class="spot-image" alt="${info.title}">` : ''}
+                    <button class="spot-button" onclick="showSpots('${areaId}')">
+                        <i class="fas fa-map-marked-alt"></i>
+                        Explore Tourist Spots
+                    </button>
+                </div>
+                <div class="language-content japanese ${currentLanguage === 'ja' ? 'active' : ''}">
+                    <h3>${areaInfo[areaId].ja.title}</h3>
+                    <p>${areaInfo[areaId].ja.description}</p>
+                    ${areaInfo[areaId].image ? `<img src="${areaInfo[areaId].image}" class="spot-image" alt="${areaInfo[areaId].ja.title}">` : ''}
+                    <button class="spot-button" onclick="showSpots('${areaId}')">
+                        <i class="fas fa-map-marked-alt"></i>
+                        観光スポットを見る
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('info-box').innerHTML = infoHTML;
+            updateLanguageDisplay();
+        }
+        
+        function showSpots(areaId) {
+            currentView = 'spots';
+            currentArea = areaId;
+            
+            const spots = areaInfo[areaId].spots;
+            const areaName = areaInfo[areaId][currentLanguage].title;
+            const areaNameJa = areaInfo[areaId]['ja'].title;
+            
+            let spotsHTML = `
+                <div class="language-content english ${currentLanguage === 'en' ? 'active' : ''}">
+                    <h3>Tourist Spots in ${areaName}</h3>
+                    <div class="spot-grid">
+            `;
+            
+            spots.forEach(spotId => {
+                const spot = spotInfo[spotId][currentLanguage];
+                spotsHTML += `
+                    <div class="spot-item" onclick="showSpotDetail('${areaId}', '${spotId}')">
+                        <h4>${spot.name}</h4>
+                        <p><em>${spot.type}</em></p>
+                    </div>
+                `;
+            });
+            
+            spotsHTML += `
+                    </div>
+                    <button class="back-button" onclick="showAreaInfo('${areaId}')">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Area
+                    </button>
+                </div>
+                <div class="language-content japanese ${currentLanguage === 'ja' ? 'active' : ''}">
+                    <h3>${areaNameJa}の観光スポット</h3>
+                    <div class="spot-grid">
+            `;
+            
+            spots.forEach(spotId => {
+                const spot = spotInfo[spotId]['ja'];
+                spotsHTML += `
+                    <div class="spot-item" onclick="showSpotDetail('${areaId}', '${spotId}')">
+                        <h4>${spot.name}</h4>
+                        <p><em>${spot.type}</em></p>
+                    </div>
+                `;
+            });
+            
+            spotsHTML += `
+                    </div>
+                    <button class="back-button" onclick="showAreaInfo('${areaId}')">
+                        <i class="fas fa-arrow-left"></i>
+                        エリアに戻る
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('info-box').innerHTML = spotsHTML;
+            updateLanguageDisplay();
+        }
+        
+        function showSpotDetail(areaId, spotId) {
+            currentView = 'detail';
+            currentArea = areaId;
+            currentSpot = spotId;
+            
+            const spot = spotInfo[spotId][currentLanguage];
+            const spotJa = spotInfo[spotId]['ja'];
+            
+            let detailHTML = `
+                <div class="language-content english ${currentLanguage === 'en' ? 'active' : ''}">
+                    <div class="spot-detail">
+                        <h3>${spot.name}</h3>
+                        <span class="type">${spot.type}</span>
+                        <p>${spot.description}</p>
+                        
+                        ${spot.tips ? `
+                        <div class="spot-tips">
+                            <strong><i class="fas fa-lightbulb"></i> Tips:</strong>
+                            <p>${spot.tips}</p>
+                        </div>
+                        ` : ''}
+                        
+                        ${spotInfo[spotId].image ? `<img src="${spotInfo[spotId].image}" class="spot-image" alt="${spot.name}">` : ''}
+                    </div>
+                    
+                    <button class="back-button" onclick="showSpots('${areaId}')">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Spots
+                    </button>
+                </div>
+                <div class="language-content japanese ${currentLanguage === 'ja' ? 'active' : ''}">
+                    <div class="spot-detail">
+                        <h3>${spotJa.name}</h3>
+                        <span class="type">${spotJa.type}</span>
+                        <p>${spotJa.description}</p>
+                        
+                        ${spotJa.tips ? `
+                        <div class="spot-tips">
+                            <strong><i class="fas fa-lightbulb"></i> ヒント:</strong>
+                            <p>${spotJa.tips}</p>
+                        </div>
+                        ` : ''}
+                        
+                        ${spotInfo[spotId].image ? `<img src="${spotInfo[spotId].image}" class="spot-image" alt="${spotJa.name}">` : ''}
+                    </div>
+                    
+                    <button class="back-button" onclick="showSpots('${areaId}')">
+                        <i class="fas fa-arrow-left"></i>
+                        スポット一覧に戻る
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('info-box').innerHTML = detailHTML;
+            updateLanguageDisplay();
+        }
+        
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'ja' : 'en';
+            // Save preference to localStorage
+            localStorage.setItem('language', currentLanguage);
+            
+            // Refresh current view
+            if (currentView === 'area' && currentArea) {
+                showAreaInfo(currentArea);
+            } else if (currentView === 'spots' && currentArea) {
+                showSpots(currentArea);
+            } else if (currentView === 'detail' && currentArea && currentSpot) {
+                showSpotDetail(currentArea, currentSpot);
+            }
+            
+            updateLanguageDisplay();
+        }
+        
+        function updateLanguageDisplay() {
+            const englishElements = document.querySelectorAll('.language-content.english');
+            const japaneseElements = document.querySelectorAll('.language-content.japanese');
+            
+            if (currentLanguage === 'en') {
+                englishElements.forEach(el => el.classList.add('active'));
+                japaneseElements.forEach(el => el.classList.remove('active'));
+            } else {
+                englishElements.forEach(el => el.classList.remove('active'));
+                japaneseElements.forEach(el => el.classList.add('active'));
+            }
+        }
+        
+        // Initialize
+        function init() {
+            // Load dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Load language preference
+            if (localStorage.getItem('language')) {
+                currentLanguage = localStorage.getItem('language');
+            }
+            
+            updateLanguageDisplay();
+        }
+        
+        // Initialize on page load
+        init();
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+
+    <script>
+        // Inline Service Worker for PWA
+        const swCode = `
+            const CACHE_NAME = 'okinawa-travel-guide-v1';
+            const urlsToCache = [
+                '/',
+                '/index.html',
+                '/styles.css',
+                '/script.js'
+            ];
+
+            self.addEventListener('install', event => {
+                event.waitUntil(
+                    caches.open(CACHE_NAME)
+                        .then(cache => {
+                            return cache.addAll(urlsToCache);
+                        })
+                );
+            });
+
+            self.addEventListener('fetch', event => {
+                event.respondWith(
+                    caches.match(event.request)
+                        .then(response => {
+                            if (response) {
+                                return response;
+                            }
+                            return fetch(event.request);
+                        })
+                );
+            });
+        `;
+
+        // Create a Blob with the service worker code
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+
+        // Register the service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register(swUrl).then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
